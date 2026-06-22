@@ -74,22 +74,23 @@
     <div class="container">
         <div class="icon">✈️</div>
         <h1>You've been invited!</h1>
-        <p>If you don't have Triply installed, tap below to download it from the App Store. Once installed, tap the link again to join the trip!</p>
+        <p>Tap below to join the trip in the app. Since Triply is not yet on the App Store, you must have the app installed via TestFlight or Simulator.</p>
         
-        <!-- Link to App Store (Replace with actual App Store ID later) -->
-        <a href="https://apps.apple.com/app/id" class="btn">Download Triply</a>
+        <!-- Link to custom scheme fallback -->
+        <a id="join-btn" href="triply://join" class="btn">Join Trip in App</a>
     </div>
 
     <script>
-        // Optional: We can attempt to redirect to the app using a custom URL scheme fallback
-        // However, Universal Links are handled at the OS level before the page loads.
-        // If the page loads, it means the app is not installed OR the user explicitly chose to open in Safari.
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const code = urlParams.get('code');
             if (code) {
                 console.log("Trip code:", code);
-                // Can optionally save to local storage or handle further
+                // Update the button href to include the code
+                const joinBtn = document.getElementById('join-btn');
+                if (joinBtn) {
+                    joinBtn.href = "triply://join?code=" + code;
+                }
             }
         };
     </script>
