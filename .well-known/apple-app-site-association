@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "554KK7AXDR.com.suraj.Triply",
+        "paths": ["/join", "/join/*"]
+      }
+    ]
+  }
+}
