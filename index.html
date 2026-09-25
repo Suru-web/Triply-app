@@ -3,96 +3,569 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join Trip on Triply</title>
+    <title>Triply — Plan Trips, Split Bills & Travel Together</title>
+    <link rel="icon" type="image/png" href="/assets/icon.png">
+    <meta name="theme-color" content="#0B0F13">
+    <meta name="description" content="Plan dream getaways with AI in seconds, split group expenses effortlessly, collaborate with friends in real time, and explore scenic routes. The all-in-one travel app for iPhone.">
     <style>
         :root {
-            --primary: #A3F090;
-            --background: #121212;
-            --surface: #1E1E1E;
-            --text: #FFFFFF;
-            --text-secondary: #B3B3B3;
+            --primary: #23C063;
+            --primary-hover: #1FAA56;
+            --primary-glow: rgba(35, 192, 99, 0.25);
+            --bg-dark: #0B0F13;
+            --bg-card: rgba(18, 24, 32, 0.7);
+            --border-card: rgba(255, 255, 255, 0.08);
+            --border-card-hover: rgba(35, 192, 99, 0.35);
+            --text-main: #FFFFFF;
+            --text-muted: #94A3B8;
         }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--background);
-            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(35, 192, 99, 0.15), transparent 45%),
+                radial-gradient(circle at 90% 40%, rgba(59, 130, 246, 0.08), transparent 40%),
+                radial-gradient(circle at 10% 75%, rgba(245, 158, 11, 0.06), transparent 40%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(11, 15, 19, 0.8);
+            border-bottom: 1px solid var(--border-card);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 800;
+            font-size: 22px;
+            letter-spacing: -0.02em;
+        }
+
+        .brand img {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(35, 192, 99, 0.2);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-menu a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--text-main);
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff !important;
+            padding: 8px 18px;
+            border-radius: 999px;
+            border: 1px solid var(--border-card);
+            transition: all 0.2s !important;
+            font-weight: 600 !important;
+        }
+
+        .nav-btn:hover {
+            background: rgba(35, 192, 99, 0.15) !important;
+            border-color: var(--primary) !important;
+            color: var(--primary) !important;
+        }
+
+        /* Hero */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 72px 24px 60px;
+            text-align: center;
+        }
+
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(35, 192, 99, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(35, 192, 99, 0.25);
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 6vw, 68px);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+            background: linear-gradient(180deg, #FFFFFF 30%, #A1A1AA 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p.lead {
+            font-size: clamp(17px, 2.2vw, 21px);
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 36px;
+            line-height: 1.55;
+        }
+
+        .hero-actions {
+            display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
         }
-        .container {
-            background-color: var(--surface);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            max-width: 400px;
-            width: 100%;
-        }
-        h1 {
-            margin-top: 0;
-            color: var(--text);
-            font-size: 24px;
-        }
-        p {
-            color: var(--text-secondary);
-            margin-bottom: 30px;
-            line-height: 1.5;
-        }
-        .btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: #000;
+
+        .btn-app-store {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--primary);
+            color: #051A0D;
             text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 12px;
+            padding: 16px 28px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            box-shadow: 0 10px 25px var(--primary-glow);
+        }
+
+        .btn-app-store:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px var(--primary-glow);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 16px 26px;
+            border-radius: 16px;
             font-weight: 600;
             font-size: 16px;
+            border: 1px solid var(--border-card);
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Mockup Gallery */
+        .showcase-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0 40px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .showcase-row::-webkit-scrollbar {
+            display: none;
+        }
+
+        .device-card {
+            flex: 0 0 280px;
+            border-radius: 36px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .device-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 28px 60px rgba(35, 192, 99, 0.2);
+        }
+
+        .device-card img {
             width: 100%;
-            box-sizing: border-box;
-            transition: opacity 0.2s;
-        }
-        .btn:hover {
-            opacity: 0.9;
-        }
-        .app-store-badge {
-            margin-top: 20px;
             display: block;
         }
-        .icon {
-            font-size: 48px;
+
+        /* Features Section */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto 56px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 14px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 17px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 24px;
+            padding: 36px 30px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--border-card-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: rgba(35, 192, 99, 0.12);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 22px;
+            border: 1px solid rgba(35, 192, 99, 0.25);
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Quick Join Box */
+        .join-box-section {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        .join-box {
+            background: linear-gradient(135deg, rgba(35, 192, 99, 0.15) 0%, rgba(18, 24, 32, 0.9) 100%);
+            border: 1px solid rgba(35, 192, 99, 0.35);
+            border-radius: 28px;
+            padding: 44px 32px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .join-box h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .join-box p {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 24px;
+        }
+
+        .join-input-row {
+            display: flex;
+            gap: 10px;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+
+        .join-input-row input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            padding: 14px 18px;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .join-input-row input:focus {
+            border-color: var(--primary);
+        }
+
+        .join-input-row button {
+            background: var(--primary);
+            color: #051A0D;
+            border: none;
+            border-radius: 14px;
+            padding: 14px 24px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .join-input-row button:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-card);
+            padding: 48px 24px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-nav a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero { padding: 48px 20px 36px; }
+            .join-input-row { flex-direction: column; }
+            .device-card { flex: 0 0 240px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="icon">✈️</div>
-        <h1>You've been invited!</h1>
-        <p>Tap below to join the trip in the app. Since Triply is not yet on the App Store, you must have the app installed via TestFlight or Simulator.</p>
-        
-        <!-- Link to custom scheme fallback -->
-        <a id="join-btn" href="triply://join" class="btn">Join Trip in App</a>
-    </div>
+    <!-- Top Navigation -->
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="brand">
+                <img src="/assets/icon.png" alt="Triply Icon">
+                <span>Triply</span>
+            </a>
+            <div class="nav-menu">
+                <a href="#features">Features</a>
+                <a href="/join">Join Trip</a>
+                <a href="/support">Support</a>
+                <a href="/terms-and-conditions">Terms</a>
+                <a href="https://apps.apple.com" class="nav-btn">Get App</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="badge-pill">
+            <span>✨</span>
+            <span>The Modern Travel Companion for iOS</span>
+        </div>
+        <h1>Plan Trips. Split Bills.<br>Travel Together.</h1>
+        <p class="lead">
+            From smart AI itineraries to effortless group expense splitting and real-time collaboration. Spend less time managing logistics and more time exploring.
+        </p>
+        <div class="hero-actions">
+            <a href="https://apps.apple.com" class="btn-app-store">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.85-.9.04-2.03.61-2.68 1.36-.57.65-1.07 1.71-.93 2.73 1.01.08 2.06-.51 2.69-1.24z"/>
+                </svg>
+                <span>Download on App Store</span>
+            </a>
+            <a href="/join" class="btn-secondary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                <span>Join a Trip with Code</span>
+            </a>
+        </div>
+
+        <!-- Horizontal Scrollable Device Showcase -->
+        <div class="showcase-row">
+            <div class="device-card">
+                <img src="/assets/01-hero.png" alt="Triply Smart Travel Dashboard">
+            </div>
+            <div class="device-card">
+                <img src="/assets/04-hero.png" alt="Trip Collaboration and Members">
+            </div>
+            <div class="device-card">
+                <img src="/assets/03-device-top.png" alt="Group Expenses and Bill Splitting">
+            </div>
+            <div class="device-card">
+                <img src="/assets/02-device-bottom.png" alt="AI Trip Planner Assistant">
+            </div>
+            <div class="device-card">
+                <img src="/assets/06-hero.png" alt="Offline Maps and Navigation">
+            </div>
+        </div>
+    </header>
+
+    <!-- Quick Join Box -->
+    <section class="join-box-section">
+        <div class="join-box">
+            <h3>Invited by a Friend?</h3>
+            <p>Enter your 6-digit trip invite code below to jump straight into the trip on your iPhone.</p>
+            <form id="quick-join-form" class="join-input-row" onsubmit="handleQuickJoin(event)">
+                <input type="text" id="trip-code-input" placeholder="e.g. 5x8k2m" autocomplete="off" autocorrect="off" required>
+                <button type="submit">Join Trip</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Core Features -->
+    <section id="features" class="section">
+        <div class="section-header">
+            <h2>Everything for Smarter Trips</h2>
+            <p>Designed from the ground up for seamless group travel, solo wanderlust, and weekend road trips.</p>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3>AI Trip Planner</h3>
+                <p>Chat with Triply's AI to generate tailored day-by-day itineraries packed with top attractions, hidden spots, and local dining that match your travel style and budget.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Trip Collaboration</h3>
+                <p>Invite friends with a link or email. Real-time sync keeps the entire group aligned on itinerary stops, schedules, and places to see without messy group chats.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💸</div>
+                <h3>Smart Expense Splitting</h3>
+                <p>Log costs in multiple currencies with custom or equal splits. Triply instantly calculates the optimal, minimum transactions needed so everyone gets squared up effortlessly.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🗺️</div>
+                <h3>Interactive Map Navigation</h3>
+                <p>Visualize your entire journey on an interactive map. Optimize travel routes, organize daily stops, and explore scenic scenic detours along the way.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎒</div>
+                <h3>Curated Getaways</h3>
+                <p>Browse handpicked destination templates curated by travel lovers. Inspect realistic budget estimates and clone entire trips to your account in one tap.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Privacy & Cloud Sync</h3>
+                <p>Sign in securely with Apple. Your trip details, expenses, and itinerary notes are encrypted and safely backed up to the cloud across your devices.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-nav">
+            <a href="/">Home</a>
+            <a href="/join">Join Trip</a>
+            <a href="/support">Support & Help</a>
+            <a href="/terms-and-conditions">Terms of Service</a>
+            <a href="https://www.privacypolicies.com/live/16a5b6c9-fe84-4ad6-b896-ae27ee7c676f" target="_blank" rel="noopener">Privacy Policy</a>
+        </div>
+        <p>&copy; 2026 Triply. Designed for travelers worldwide.</p>
+    </footer>
 
     <script>
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const code = urlParams.get('code');
+        // Redirect if someone visits root with ?code= parameter (legacy compatibility)
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            const code = params.get('code');
             if (code) {
-                console.log("Trip code:", code);
-                // Update the button href to include the code
-                const joinBtn = document.getElementById('join-btn');
-                if (joinBtn) {
-                    joinBtn.href = "triply://join?code=" + code;
-                }
+                window.location.replace('/join' + window.location.search);
             }
-        };
+        })();
+
+        function handleQuickJoin(e) {
+            e.preventDefault();
+            const input = document.getElementById('trip-code-input');
+            const code = input.value.trim();
+            if (code) {
+                window.location.href = '/join?code=' + encodeURIComponent(code);
+            }
+        }
     </script>
 </body>
 </html>

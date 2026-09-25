@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support & Help Center — Triply</title>
+    <link rel="icon" type="image/png" href="/assets/icon.png">
+    <meta name="theme-color" content="#0B0F13">
+    <meta name="description" content="Get help with Triply, find answers to frequently asked questions, manage subscriptions, or contact our support team.">
+    <style>
+        :root {
+            --primary: #23C063;
+            --primary-hover: #1FAA56;
+            --bg-dark: #0B0F13;
+            --surface: #141920;
+            --card-bg: rgba(22, 27, 34, 0.7);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-main: #FFFFFF;
+            --text-muted: #94A3B8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(35, 192, 99, 0.12), transparent 40%),
+                radial-gradient(circle at 85% 70%, rgba(59, 130, 246, 0.08), transparent 40%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 32px;
+            max-width: 1080px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .brand img {
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: rgba(35, 192, 99, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(35, 192, 99, 0.25);
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 38px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 14px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 17px;
+            max-width: 580px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, rgba(35, 192, 99, 0.1) 0%, rgba(20, 25, 32, 0.9) 100%);
+            border: 1px solid rgba(35, 192, 99, 0.3);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 48px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-card h2 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .contact-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 24px;
+        }
+
+        .email-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: #051A0D;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .email-cta:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(35, 192, 99, 0.3);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.01em;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 20px 24px;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 16px;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question svg {
+            transition: transform 0.2s;
+            color: var(--primary);
+            flex-shrink: 0;
+            margin-left: 16px;
+        }
+
+        .faq-item.open .faq-question svg {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: var(--text-muted);
+            font-size: 15px;
+            padding: 0 24px;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+            padding: 0 24px 20px 24px;
+        }
+
+        .faq-answer a {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        footer {
+            border-top: 1px solid var(--card-border);
+            padding: 32px 24px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 28px; }
+            .contact-card { padding: 24px 18px; }
+            nav { padding: 16px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="brand">
+            <img src="/assets/icon.png" alt="Triply Logo">
+            <span>Triply</span>
+        </a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/join">Join Trip</a>
+            <a href="/terms-and-conditions">Terms</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="hero-section">
+            <div class="badge">HELP & SUPPORT</div>
+            <h1>How Can We Help You?</h1>
+            <p class="subtitle">Find answers to common questions about Triply, subscriptions, trips, and account management.</p>
+        </div>
+
+        <div class="contact-card">
+            <h2>Need Direct Assistance?</h2>
+            <p>Our support team is always ready to assist you. Drop us an email and we'll typically respond within 24 hours.</p>
+            <a href="mailto:surajgmehar@gmail.com?subject=Triply%20App%20Support" class="email-cta">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span>Email Support: surajgmehar@gmail.com</span>
+            </a>
+        </div>
+
+        <h2 class="section-title">Frequently Asked Questions</h2>
+
+        <div class="faq-list">
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>How do I invite friends to join my trip?</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    Open any trip from your Home dashboard, tap on the Trip Members or Details section, and tap <strong>"Invite Friends"</strong>. You can copy the unique invite link or share it directly via Messages, WhatsApp, or email. Once your friend taps the link, they will instantly join the trip.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>How does expense splitting and settlement work?</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    Whenever an expense occurs, tap the "+" button in the Expenses tab. Choose the category, who paid the amount, and which group members are splitting it. Triply automatically computes balances and calculates the minimal number of transactions needed to settle all debts.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>How do I use the AI Trip Planner?</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    Tap the <strong>Agent</strong> tab in the app. Tell Triply your destination, dates, budget level, and travel style (e.g. adventure, relaxation, foodie). Our AI engine will generate a comprehensive day-by-day itinerary with attractions, dining spots, and route recommendations that you can save straight to your trips.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>How do I manage or cancel my Triply subscription?</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    All subscriptions and in-app purchases are securely processed through your Apple ID. To manage or cancel your subscription, open your iPhone's <strong>Settings</strong> &gt; tap your <strong>Apple ID Profile</strong> at the top &gt; tap <strong>Subscriptions</strong> &gt; select <strong>Triply</strong> &gt; tap <strong>Cancel Subscription</strong>.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>How do I request a refund for an In-App Purchase?</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    Because transactions are handled directly through the Apple App Store, refunds are processed according to Apple's refund policy. You can request a refund by visiting <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener">reportaproblem.apple.com</a> with your Apple ID.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>How can I delete my account and data?</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                    You have complete control over your data. In the app, navigate to <strong>Settings</strong> &gt; scroll to the bottom &gt; tap <strong>Delete Account</strong>. Confirming this action will immediately and permanently erase your account, profile, and all associated trip data from our servers. You can also email us at <a href="mailto:surajgmehar@gmail.com">surajgmehar@gmail.com</a> to request data deletion.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/">Home</a>
+            <a href="/join">Join Trip</a>
+            <a href="/support">Support</a>
+            <a href="/terms-and-conditions">Terms of Service</a>
+            <a href="https://www.privacypolicies.com/live/16a5b6c9-fe84-4ad6-b896-ae27ee7c676f" target="_blank" rel="noopener">Privacy Policy</a>
+        </div>
+        <p>&copy; 2026 Triply. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                item.classList.toggle('open');
+            });
+        });
+    </script>
+</body>
+</html>

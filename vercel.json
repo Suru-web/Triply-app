@@ -1,8 +1,36 @@
 {
+  "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/.well-known/apple-app-site-association",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/join/:path*",
+      "destination": "/join/index.html"
+    },
+    {
+      "source": "/join",
+      "destination": "/join/index.html"
+    },
+    {
+      "source": "/support",
+      "destination": "/support/index.html"
+    },
+    {
+      "source": "/terms-and-conditions",
+      "destination": "/terms-and-conditions/index.html"
     }
   ]
 }
